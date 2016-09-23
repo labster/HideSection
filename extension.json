@@ -1,0 +1,43 @@
+{
+	"name": "HideSection",
+	"author": "Brent Laabs",
+	"url": "//mediawiki.org/wiki/Extension:HideSection",
+	"descriptionmsg": "hidesection-desc",
+	"MessagesDirs": {
+		"HideSection": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"HideSectionHooks": "HideSection.hooks.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"HideSectionHooks::onBeforePageDisplay"
+		],
+		"ParserSectionCreate": [
+			"HideSectionHooks::onParserSectionCreate"
+		],
+		"SkinEditSectionLinks": [
+			"HideSectionHooks::onSkinEditSectionLinks"
+		],
+		"SkinTemplateOutputPageBeforeExec": [
+			"HideSectionHooks::onSkinTemplateOutputPageBeforeExec"
+		]
+	},
+	"ResourceModules": {
+		"ext.hideSection": {
+			"scripts": [
+				"ext.hidesection.js"
+			],
+			"styles": [
+				"ext.hidesection.css"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"removeExtPath": "HideSection/resources"
+	},
+	"manifest_version": 1
+}

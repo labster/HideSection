@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kghbln"
+		]
+	},
+	"hidesection": "Section Hide",
+	"hidesection-desc": "Stellt einen Link zum Ein- und Ausblenden von Abschnittsüberschriften bereit",
+	"hidesection-hide": "ausblenden",
+	"hidesection-show": "einblenden",
+	"hidesection-hideall": "alle ausblenden",
+	"hidesection-showall": "alle einbleden"
+}

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"BrentLaabs"
+		]
+	},
+	"hidesection": "HideSection",
+	"hidesection-desc": "Creates links on each header to collapse the section",
+	"hidesection-hide": "hide",
+	"hidesection-show": "show",
+	"hidesection-hideall": "hide all",
+	"hidesection-showall": "show all"
+}
