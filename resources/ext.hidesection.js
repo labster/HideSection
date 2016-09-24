@@ -5,24 +5,24 @@
 		e.preventDefault();
 
 		var $link = $( this );
+
 		var $this_block = $link.parents('.hs-block');
 		var $textlink = $link.attr('class') == "hidesection-link"  ? $link : $this_block.find('.hidesection-link');
-		var $imglink  = $link.attr('class') == "hidesection-image" ? $link : $this_block.children('.hidesection-image');
-		// Toggle text
-		if ( $textlink.html() == $link.data('hide') ) {
-			$textlink.text( $textlink.data('show') );
-		} else {
-			$textlink.text( $textlink.data('hide') );
-		}
-		// Toggle image
-		if ( $imglink.attr('src') == $link.data('hide') ) {
-			$imglink.attr( 'src', $imglink.data('show') );
-		} else {
-			$imglink.attr( 'src', $imglink.data('hide') );
-		}
+		var $imglink  = $link.attr('class') == "hidesection-image" ? $link : $this_block.find('.hidesection-image');
+
+		// Did we click text or an image?
+		var $show = this.tagName == 'IMG'
+				? $imglink.attr('src') == $link.data('show')
+				: $textlink.html() == $link.data('show');
+		var $toggle   = $show ? 'show' : 'hide';
+		var $nexttext = $show ? 'hide' : 'show';
+
+		// toggle text and/or image
+                $textlink.text( $textlink.data($nexttext) );
+		$imglink.attr( 'src', $imglink.data($nexttext) );
 
 		// Toggle this div visibility
-		$this_block.children('.hs-section').toggle();
+		$this_block.children('.hs-section')[$toggle]();
 
 		// Toggle divs under this hierarchy
 		var $level = $this_block.data('level');
@@ -31,9 +31,27 @@
 		$next_blocks.each( function( index, element ) {
 			var $block = $( element );
 			if ($block.data('level') <= $level) {
+				// Break loop if we're out of subsections
 				return false;
 			}
-			$block.toggle();
+
+			// Keep track of whether or not this div is hidden
+			// on multiple levels
+			var $hiddenby = element['mwSHHiddenBy'] || {};
+			if ($toggle == "show") {
+				delete $hiddenby[$level];
+			} else {
+				$hiddenby[$level] = true;
+			}
+			element['mwSHHiddenBy'] = $hiddenby;
+
+			// Toggle (or keep the same)
+			if ( Object.keys($hiddenby).length ) {
+				$block.hide();
+			}
+			else {
+				$block.show()
+			}
 		});
 	}
 

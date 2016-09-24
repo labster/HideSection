@@ -63,7 +63,7 @@ class HideSectionHooks {
 
         // Add hide/show link next to edit links
         if ($section !== 0) {
-            $links[] = [
+            $links['hidesection'] = [
                 'targetTitle' => $title,
                 'text' => $hidetext,
                 'attribs' => [
@@ -84,7 +84,7 @@ class HideSectionHooks {
             $hideall  = wfMessage( 'hidesection-hideall' )->text();
             $titleall = wfMessage( 'hidesection-hidealltitle' )->text();
 
-            $links[] = [
+            $links['hidesectionall'] = [
                 'targetTitle' => $title,
                 'text' => $hideall,
                 'attribs' => [
