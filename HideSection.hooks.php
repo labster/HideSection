@@ -67,7 +67,7 @@ class HideSectionHooks {
                 'targetTitle' => $title,
                 'text' => $hidetext,
                 'attribs' => [
-                    "class" => "hidesection-link",
+                    "class" => "hidesection-link internal",
                     "data-show" => $showtext,
                     "data-hide" => $hidetext,
                     "data-section" => $section,
@@ -88,7 +88,7 @@ class HideSectionHooks {
                 'targetTitle' => $title,
                 'text' => $hideall,
                 'attribs' => [
-                    "class" => "hidesection-all",
+                    "class" => "hidesection-all internal",
                     "data-show" => $showall,
                     "data-hide" => $hideall,
                     "title" => $titleall,
@@ -109,7 +109,7 @@ class HideSectionHooks {
             $titleall = wfMessage( 'hidesection-hidealltitle' )->text();
 
             $linkelem = Html::element('a', [
-                    "class" => "hidesection-all",
+                    "class" => "hidesection-all internal",
                     "data-show" => $showall,
                     "data-hide" => $hideall,
                     "title" => $titleall,
