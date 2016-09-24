@@ -10,9 +10,9 @@
 		var $imglink  = $link.attr('class') == "hidesection-image" ? $link : $this_block.children('.hidesection-image');
 		// Toggle text
 		if ( $textlink.html() == $link.data('hide') ) {
-			$textlink.html( $textlink.data('show') );
+			$textlink.text( $textlink.data('show') );
 		} else {
-			$textlink.html( $textlink.data('hide') );
+			$textlink.text( $textlink.data('hide') );
 		}
 		// Toggle image
 		if ( $imglink.attr('src') == $link.data('hide') ) {
@@ -44,9 +44,9 @@
 		// Toggle text
 		var $show = 0;
 		if ( $link.html() == $link.data('hide') ) {
-			$link.html( $link.data('show') );
+			$link.text( $link.data('show') );
 		} else {
-			$link.html( $link.data('hide') );
+			$link.text( $link.data('hide') );
 			$show = 1;
 		}
 
@@ -55,11 +55,11 @@
 		var $imglink  = $(".hidesection-image");
 		if ($show) {
 			$sections.show();
-			$textlink.html( $textlink.data('hide') );
+			$textlink.text( $textlink.data('hide') );
 			$imglink.attr( 'src', $imglink.data('hide') );
 		} else {
 			$sections.hide();
-			$textlink.html( $textlink.data('show') );
+			$textlink.text( $textlink.data('show') );
 			$imglink.attr( 'src', $imglink.data('show') );
 		}
 	}

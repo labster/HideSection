@@ -57,8 +57,9 @@ class HideSectionHooks {
 
         if ($wgHideSectionHideText) return true;
 
-        $hidetext = wfMessage( 'hidesection-hide' )->text();
-        $showtext = wfMessage( 'hidesection-show' )->text();
+        $hidetext  = wfMessage( 'hidesection-hide' )->text();
+        $showtext  = wfMessage( 'hidesection-show' )->text();
+        $titletext = wfMessage( 'hidesection-hidetitle' )->text();
 
         // Add hide/show link next to edit links
         if ($section !== 0) {
@@ -70,7 +71,7 @@ class HideSectionHooks {
                     "data-show" => $showtext,
                     "data-hide" => $hidetext,
                     "data-section" => $section,
-                    "title" => "Hide this section",
+                    "title" => $titletext,
                     ],
                 'query' => array(),
                 'options' => array(),
@@ -79,8 +80,9 @@ class HideSectionHooks {
 
         // Add hide all/show all link on first section
         if ($section == 1) {
-            $showall = wfMessage( 'hidesection-showall' )->text();
-            $hideall = wfMessage( 'hidesection-hideall' )->text();
+            $showall  = wfMessage( 'hidesection-showall' )->text();
+            $hideall  = wfMessage( 'hidesection-hideall' )->text();
+            $titleall = wfMessage( 'hidesection-hidealltitle' )->text();
 
             $links[] = [
                 'targetTitle' => $title,
@@ -89,7 +91,7 @@ class HideSectionHooks {
                     "class" => "hidesection-all",
                     "data-show" => $showall,
                     "data-hide" => $hideall,
-                    "title" => "Hide all sections",
+                    "title" => $titleall,
                     ],
                 'query' => array(),
                 'options' => array(),
@@ -102,14 +104,15 @@ class HideSectionHooks {
         global $wgHideSectionTitleLink;
 
         if ($wgHideSectionTitleLink) {
-            $showall = wfMessage( 'hidesection-showall' )->text();
-            $hideall = wfMessage( 'hidesection-hideall' )->text();
+            $showall  = wfMessage( 'hidesection-showall' )->text();
+            $hideall  = wfMessage( 'hidesection-hideall' )->text();
+            $titleall = wfMessage( 'hidesection-hidealltitle' )->text();
 
             $linkelem = Html::element('a', [
                     "class" => "hidesection-all",
                     "data-show" => $showall,
                     "data-hide" => $hideall,
-                    "title" => "Hide all sections",
+                    "title" => $titleall,
                     "href" => "#`"
                 ],
                 $hideall

@@ -8,6 +8,8 @@
 	"hidesection-desc": "Creates links on each header to collapse the section",
 	"hidesection-hide": "hide",
 	"hidesection-show": "show",
+	"hidesection-hidetitle": "Expand or collapse this section",
 	"hidesection-hideall": "hide all",
-	"hidesection-showall": "show all"
+	"hidesection-showall": "show all",
+	"hidesection-hidealltitle": "Expand or collapse all sections on this page"
 }

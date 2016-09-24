@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"BrentLaabs"
+		]
+	},
+	"hidesection": "Extension name",
+	"hidesection-desc": "Extension description",
+	"hidesection-hide": "Text that shows on [hide] links",
+	"hidesection-show": "Text that shows on [show] links",
+	"hidesection-hidetitle": "Title attribute text for hide/show links to explain the link",
+	"hidesection-hideall": "Text for [hide all] links",
+	"hidesection-showall": "Text for [show all] links",
+	"hidesection-hidealltitle": "Title attribute text for hide all/show all links to explain the link"
+}
