@@ -3,3 +3,6 @@
   display: block;
   float: right;
 }
+.hs-hide-H1, .hs-hide-H2, .hs-hide-H3, .hs-hide-H4, .hs-hide-H5, .hs-hide-H6, .hs-hide-H7 {
+  display: none;
+}

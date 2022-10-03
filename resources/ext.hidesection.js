@@ -1,58 +1,43 @@
 ( function ( $, mw ) {
 	'use strict';
 
-	function hidesection (e) {
-		e.preventDefault();
+	const non_nesting = {
+		'H1': 'H1',
+		'H2': 'H1,H2',
+		'H3': 'H1,H2,H3',
+		'H4': 'H1,H2,H3,H4',
+		'H5': 'H1,H2,H3,H4,H5',
+		'H6': 'H1,H2,H3,H4,H5,H6',
+		'H7': 'H1,H2,H3,H4,H5,H6,H7'
+	};
+	const hide_classes = [ 'hs-hide-H1','hs-hide-H2','hs-hide-H3','hs-hide-H4','hs-hide-H5','hs-hide-H6','hs-hide-H7' ];
 
-		var $link = $( this );
+	function hidesection (e, $link) {
+		if (e) e.preventDefault();
+		$link ||= $( this );
 
-		var $this_block = $link.parents('.hs-block');
-		var $textlink = $link.attr('class') == "hidesection-link"  ? $link : $this_block.find('.hidesection-link');
-		var $imglink  = $link.attr('class') == "hidesection-image" ? $link : $this_block.find('.hidesection-image');
+		var $editlinks = $link.parents('.mw-editsection').first();
+		var $textlink = $link.attr('class') == "hidesection-link"  ? $link : $editlinks.find('.hidesection-link');
+		var $imglink  = $link.attr('class') == "hidesection-image" ? $link : $editlinks.find('.hidesection-image');
 
 		// Did we click text or an image?
-		var $show = this.tagName == 'IMG'
+		var $show = $link.prop('tagName') == 'IMG'
 				? $imglink.attr('src') == $link.data('show')
 				: $textlink.html() == $link.data('show');
 		var $toggle   = $show ? 'show' : 'hide';
 		var $nexttext = $show ? 'hide' : 'show';
+		var $toggleClass = $show ? 'removeClass' : 'addClass';
 
 		// toggle text and/or image
-                $textlink.text( $textlink.data($nexttext) );
+		$textlink.text( $textlink.data($nexttext) );
 		$imglink.attr( 'src', $imglink.data($nexttext) );
 
-		// Toggle this div visibility
-		$this_block.children('.hs-section')[$toggle]();
+		// Toggle visibility
+		var $header  = $link.parents('h1,h2,h3,h4,h5,h6,h7').first();
+		var headtype = $header.prop('tagName');
 
-		// Toggle divs under this hierarchy
-		var $level = $this_block.data('level');
-		var $next_blocks = $this_block.nextAll('.hs-block');
-
-		$next_blocks.each( function( index, element ) {
-			var $block = $( element );
-			if ($block.data('level') <= $level) {
-				// Break loop if we're out of subsections
-				return false;
-			}
-
-			// Keep track of whether or not this div is hidden
-			// on multiple levels
-			var $hiddenby = element['mwSHHiddenBy'] || {};
-			if ($toggle == "show") {
-				delete $hiddenby[$level];
-			} else {
-				$hiddenby[$level] = true;
-			}
-			element['mwSHHiddenBy'] = $hiddenby;
-
-			// Toggle (or keep the same)
-			if ( Object.keys($hiddenby).length ) {
-				$block.hide();
-			}
-			else {
-				$block.show()
-			}
-		});
+		// include <tag> in class name, so section can be hidden by more than one link
+		$header.nextUntil( non_nesting[headtype] )[$toggleClass]('hs-hide-' + headtype);
 	}
 
 	function hideall (e) {
@@ -68,17 +53,15 @@
 			$show = 1;
 		}
 
-		var $sections = $('.hs-block, .hs-section').not("[data-level='2']");
 		var $textlink = $(".hidesection-link");
 		var $imglink  = $(".hidesection-image");
 		if ($show) {
-			$sections.show();
+			// just brute-force through this
+			$('.hs-hide-H1,.hs-hide-H2,.hs-hide-H3,.hs-hide-H4,.hs-hide-H5,.hs-hide-H6,.hs-hide-H7').removeClass( hide_classes );
 			$textlink.text( $textlink.data('hide') );
 			$imglink.attr( 'src', $imglink.data('hide') );
 		} else {
-			$sections.hide();
-			$textlink.text( $textlink.data('show') );
-			$imglink.attr( 'src', $imglink.data('show') );
+			$('.hidesection-link, .hidesection-image').each( function (i,el) { hidesection( undefined, $(el)) });
 		}
 	}
 

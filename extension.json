@@ -15,9 +15,6 @@
 		"BeforePageDisplay": [
 			"HideSectionHooks::onBeforePageDisplay"
 		],
-		"ParserSectionCreate": [
-			"HideSectionHooks::onParserSectionCreate"
-		],
 		"SkinEditSectionLinks": [
 			"HideSectionHooks::onSkinEditSectionLinks"
 		],

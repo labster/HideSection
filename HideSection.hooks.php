@@ -11,47 +11,6 @@ class HideSectionHooks {
         return true;
      }
 
-    public static function onParserSectionCreate( $parser, $section, &$sectionContent, $showEditLinks ) {
-        global $wgHideSectionImages;
-        
-        if ($section <= 0 || !$showEditLinks) {
-                return true;
-        }
-
-        // Could theoretically break if another extension loads before us
-        $headerLevel = (int) substr( $sectionContent, 2, 1 );
-
-        // Add the image form
-        if ($wgHideSectionImages) {
-            $img = Xml::Element( 'img', [
-                'class'     => "hidesection-image",
-                'src'       => $wgHideSectionImages['hide'],
-                'data-hide' => $wgHideSectionImages['hide'],
-                'data-show' => $wgHideSectionImages['show']
-            ]);
-
-            if (isset($wgHideSectionImages['location']) && $wgHideSectionImages['location'] == "end") {
-                $sectionContent = preg_replace('/(?=<\/h[2-6]\>)/', $img, $sectionContent, 1);
-            }
-            else {
-                // Right after the very first <h*> tag
-                $sectionContent = preg_replace('/>\K/', $img, $sectionContent, 1);
-            }
-
-        }
-        
-        // Insert the inner div around the section's contents so we can hide that
-        // And an outer div around the entire section for hierarchical hiding
-        $sectionContent = preg_replace( '/<\/h[2-6]>\K/', '<div class="hs-section">', $sectionContent, 1 );
-        $sectionContent = Html::Rawelement("div",
-                [ 'class' => "hs-block", 'data-level' => $headerLevel ],
-                $sectionContent . "</div>"
-        );
-
-        return true;
-    }
-
-
     public static function onSkinEditSectionLinks( $skin, $title, $section, $tooltip, &$links, $lang ) {
         global $wgHideSectionHideText;
 
