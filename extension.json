@@ -19,8 +19,8 @@
 		"SkinEditSectionLinks": [
 			"HideSectionHooks::onSkinEditSectionLinks"
 		],
-		"SkinTemplateOutputPageBeforeExec": [
-			"HideSectionHooks::onSkinTemplateOutputPageBeforeExec"
+		"BeforePageDisplay": [
+			"HideSectionHooks::onBeforePageDisplay"
 		]
 	},
 	"ResourceModules": {
