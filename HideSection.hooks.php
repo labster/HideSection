@@ -82,6 +82,9 @@ class HideSectionHooks {
             );
 
             $title = $out->getPageTitle();
+    		if ( !$title instanceof Title ) {
+    			return;
+    		}
 
             // Append to page title
             $out->setPageTitle( $title . $hideelem );
