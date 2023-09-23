@@ -59,20 +59,20 @@ class HideSectionHooks {
 
     }
 
-    public static function onSkinTemplateOutputPageBeforeExec ( &$skin, &$template ) {
+    public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
         global $wgHideSectionTitleLink;
 
-        if ($wgHideSectionTitleLink) {
+        if ( $wgHideSectionTitleLink ) {
             $showall  = wfMessage( 'hidesection-showall' )->text();
             $hideall  = wfMessage( 'hidesection-hideall' )->text();
             $titleall = wfMessage( 'hidesection-hidealltitle' )->text();
 
             $linkelem = Html::element('a', [
-                    "class" => "hidesection-all internal",
-                    "data-show" => $showall,
-                    "data-hide" => $hideall,
-                    "title" => $titleall,
-                    "href" => "#`"
+                    'class' => 'hidesection-all internal',
+                    'data-show' => $showall,
+                    'data-hide' => $hideall,
+                    'title' => $titleall,
+                    'href' => "#`"
                 ],
                 $hideall
             );
@@ -81,8 +81,10 @@ class HideSectionHooks {
                 '[' . $linkelem . ']'
             );
 
+            $title = $out->getPageTitle();
+
             // Append to page title
-            $template->data['title'] .= $hideelem;
+            $out->setPageTitle( $title . $hideelem );
         }
         return true;
     }
