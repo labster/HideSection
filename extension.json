@@ -1,6 +1,6 @@
 {
 	"name": "HideSection",
-	"version": "2.0",
+	"version": "3.0",
 	"author": "Brent Laabs",
 	"url": "//mediawiki.org/wiki/Extension:HideSection",
 	"descriptionmsg": "hidesection-desc",
@@ -18,10 +18,11 @@
 		],
 		"SkinEditSectionLinks": [
 			"HideSectionHooks::onSkinEditSectionLinks"
-		],
-		"SkinTemplateOutputPageBeforeExec": [
-			"HideSectionHooks::onSkinTemplateOutputPageBeforeExec"
 		]
+	},
+	"config": {
+		"HideSectionTitleLink": false,
+		"HideSectionHideText": false
 	},
 	"ResourceModules": {
 		"ext.hideSection": {
@@ -30,12 +31,17 @@
 			],
 			"styles": [
 				"ext.hidesection.css"
+			],
+			"messages": [
+				"hidesection-showall",
+				"hidesection-hideall",
+				"hidesection-hidealltitle"
 			]
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "resources",
-		"removeExtPath": "HideSection/resources"
+		"remoteExtPath": "HideSection/resources"
 	},
 	"manifest_version": 1
 }

@@ -7,7 +7,20 @@
 class HideSectionHooks {
 
     public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+        global $wgHideSectionTitleLink;
         $out->addModules( 'ext.hideSection' );
+
+        if ( $wgHideSectionTitleLink ) {
+
+            $hideelem = Html::Rawelement( 'span',
+                 [ 'class' => 'hidesection-head' ],
+            );
+
+            $title = $out->getPageTitle();
+
+            // Append to page title
+            $out->setPageTitle( $title . $hideelem  );
+        }
         return true;
      }
 
@@ -56,35 +69,6 @@ class HideSectionHooks {
                 'options' => array(),
             ];
         }
-
-    }
-
-    public static function onSkinTemplateOutputPageBeforeExec ( &$skin, &$template ) {
-        global $wgHideSectionTitleLink;
-
-        if ($wgHideSectionTitleLink) {
-            $showall  = wfMessage( 'hidesection-showall' )->text();
-            $hideall  = wfMessage( 'hidesection-hideall' )->text();
-            $titleall = wfMessage( 'hidesection-hidealltitle' )->text();
-
-            $linkelem = Html::element('a', [
-                    "class" => "hidesection-all internal",
-                    "data-show" => $showall,
-                    "data-hide" => $hideall,
-                    "title" => $titleall,
-                    "href" => "#`"
-                ],
-                $hideall
-            );
-            $hideelem = Html::Rawelement('span',
-                 array( 'class' => 'hidesection-head' ),
-                '[' . $linkelem . ']'
-            );
-
-            // Append to page title
-            $template->data['title'] .= $hideelem;
-        }
-        return true;
     }
 }
 
