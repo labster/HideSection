@@ -6,8 +6,18 @@
 
 class HideSectionHooks {
 
+	private static function shouldHaveHideSection( Skin $skin ): bool {
+		$name = $skin->getSkinName();
+		return !( $name === 'minerva' )
+			&& !in_array( $name, ExtensionRegistry::getInstance()->getAttribute( 'HideSectionDisabled' ) );
+	}
+
     public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
         global $wgHideSectionTitleLink;
+		if ( !self::shouldHaveHideSection( $skin ) ) {
+			return;
+		}
+
         $out->addModules( 'ext.hideSection' );
 
         if ( $wgHideSectionTitleLink ) {
@@ -25,6 +35,10 @@ class HideSectionHooks {
      }
 
     public static function onSkinEditSectionLinks( $skin, $title, $section, $tooltip, &$links, $lang ) {
+		if ( !self::shouldHaveHideSection( $skin ) ) {
+			return;
+		}
+
         global $wgHideSectionHideText;
 
         if ($wgHideSectionHideText) return true;
