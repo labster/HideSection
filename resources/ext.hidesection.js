@@ -68,16 +68,16 @@
 	mw.hook( 'wikipage.content' ).add( function () {
 		$('.hidesection-head').each(function() {
 			var showall = mw.message( 'hidesection-showall' ).text();
-            var hideallmsg = mw.message( 'hidesection-hideall' ).text();
-            var titleall = mw.message( 'hidesection-hidealltitle' ).text();
-            var linkelem = $("<a>")
+			var hideallmsg = mw.message( 'hidesection-hideall' ).text();
+			var titleall = mw.message( 'hidesection-hidealltitle' ).text();
+			var linkelem = $("<a>")
 					.addClass( "hidesection-all" )
 					.addClass( "internal ")
 					.attr( "data-show", showall)
 					.attr( "data-hide", hideallmsg)
 					.attr( "title", titleall)
 					.text( hideallmsg );
-            $(this).append( linkelem );
+			$(this).append( linkelem );
 		});
 		$('.hidesection-link, .hidesection-image').click( hidesection );
 		$('.hidesection-all').click( hideall );
