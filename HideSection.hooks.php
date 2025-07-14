@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\Html\Html;
+
 /**
  * Hooks for extension HideSection.
  * @ingroup Extensions
@@ -22,9 +25,7 @@ class HideSectionHooks {
 
 		if ( $wgHideSectionTitleLink ) {
 
-			$hideelem = Html::Rawelement( 'span',
-				 [ 'class' => 'hidesection-head' ],
-			);
+			$hideelem = Html::element( 'span', [ 'class' => 'hidesection-head' ] );
 
 			$title = $out->getPageTitle();
 

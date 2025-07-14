@@ -4,6 +4,9 @@
 	"author": "Brent Laabs",
 	"url": "//mediawiki.org/wiki/Extension:HideSection",
 	"descriptionmsg": "hidesection-desc",
+	"requires": {
+		"MediaWiki": ">= 1.40.0"
+	},
 	"MessagesDirs": {
 		"HideSection": [
 			"i18n"
