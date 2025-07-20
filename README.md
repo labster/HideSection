@@ -11,8 +11,8 @@ header, any headers below it are automatically hidden.  Additionally, there is a
 
 ## Installation
 
-Requires Mediawiki 1.25 or higher, as we use extension registration. Just do the
-standard phrase in your LocalSettings.php:
+The extension requires Mediawiki 1.40 or higher. Just add the
+standard phrase to your LocalSettings.php:
 
 ```php
 wfLoadExtension( "HideSection" );
