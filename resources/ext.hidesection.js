@@ -2,15 +2,14 @@
 	'use strict';
 
 	const non_nesting = {
-		'H1': 'H1',
-		'H2': 'H1,H2',
-		'H3': 'H1,H2,H3',
-		'H4': 'H1,H2,H3,H4',
-		'H5': 'H1,H2,H3,H4,H5',
-		'H6': 'H1,H2,H3,H4,H5,H6',
-		'H7': 'H1,H2,H3,H4,H5,H6,H7'
+		'H1': '.mw-heading1',
+		'H2': '.mw-heading1,.mw-heading2',
+		'H3': '.mw-heading1,.mw-heading2,.mw-heading3',
+		'H4': '.mw-heading1,.mw-heading2,.mw-heading3,.mw-heading4',
+		'H5': '.mw-heading1,.mw-heading2,.mw-heading3,.mw-heading4,.mw-heading5',
+		'H6': '.mw-heading1,.mw-heading2,.mw-heading3,.mw-heading4,.mw-heading5,.mw-heading6',
 	};
-	const hide_classes = [ 'hs-hide-H1','hs-hide-H2','hs-hide-H3','hs-hide-H4','hs-hide-H5','hs-hide-H6','hs-hide-H7' ];
+	const hide_classes = [ 'hs-hide-H1','hs-hide-H2','hs-hide-H3','hs-hide-H4','hs-hide-H5','hs-hide-H6' ];
 
 	function hidesection (e, $link) {
 		if (e) e.preventDefault();
@@ -33,8 +32,9 @@
 		$imglink.attr( 'src', $imglink.data($nexttext) );
 
 		// Toggle visibility
-		var $header  = $link.parents('h1,h2,h3,h4,h5,h6,h7').first();
-		var headtype = $header.prop('tagName');
+		var $header  = $link.closest('.mw-heading');
+		var level = $header.attr('class').match( /mw-heading([1-6])/ )[ 1 ];
+		var headtype = 'H' + level;
 
 		// include <tag> in class name, so section can be hidden by more than one link
 		$header.nextUntil( non_nesting[headtype] )[$toggleClass]('hs-hide-' + headtype);
@@ -57,7 +57,7 @@
 		var $imglink  = $(".hidesection-image");
 		if ($show) {
 			// just brute-force through this
-			$('.hs-hide-H1,.hs-hide-H2,.hs-hide-H3,.hs-hide-H4,.hs-hide-H5,.hs-hide-H6,.hs-hide-H7').removeClass( hide_classes );
+			$('.hs-hide-H1,.hs-hide-H2,.hs-hide-H3,.hs-hide-H4,.hs-hide-H5,.hs-hide-H6').removeClass( hide_classes );
 			$textlink.text( $textlink.data('hide') );
 			$imglink.attr( 'src', $imglink.data('hide') );
 		} else {

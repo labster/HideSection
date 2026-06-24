@@ -11,7 +11,7 @@ header, any headers below it are automatically hidden.  Additionally, there is a
 
 ## Installation
 
-The extension requires Mediawiki 1.40 or higher. Just add the
+The extension requires MediaWiki 1.45 or higher. Just add the
 standard phrase to your LocalSettings.php:
 
 ```php
