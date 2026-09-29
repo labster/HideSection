@@ -44,9 +44,11 @@
 		e.preventDefault();
 
 		var $link = $( '.hidesection-all' );
-		var $show = $link.text() == $link.data('hide');
-		$link.text( $show ? $link.data('show') : $link.data('hide') );
-
+		var $firstLink = $link.first();
+		var $hidden = $( '.hs-hide-H1, .hs-hide-H2, .hs-hide-H3, .hs-hide-H4, .hs-hide-H5, .hs-hide-H6' ).length > 0;
+		var $show = !$hidden;
+		$link.text( $show ? $firstLink.data('show') : $firstLink.data('hide') );
+		
 		if ( $show ) {
 			$( '.mw-heading' ).each( function () {
 				var $header = $( this );
