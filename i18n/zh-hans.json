@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Maitian MaiLin"
+		]
+	},
+	"hidesection-desc": "在每个标题行上创建链接用于折叠章节",
+	"hidesection-hide": "折叠",
+	"hidesection-show": "展开",
+	"hidesection-hidetitle": "展开或折叠此章节",
+	"hidesection-hideall": "折叠全部",
+	"hidesection-showall": "展开全部",
+	"hidesection-hidealltitle": "展开或折叠该页面的全部章节"
+}
