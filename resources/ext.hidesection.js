@@ -44,25 +44,27 @@
 		e.preventDefault();
 
 		var $link = $( '.hidesection-all' );
-		// Toggle text
-		var $show = 0;
-		if ( $link.html() == $link.data('hide') ) {
-			$link.text( $link.data('show') );
+		var $show = $link.text() == $link.data('hide');
+		$link.text( $show ? $link.data('show') : $link.data('hide') );
+
+		if ( $show ) {
+			$( '.mw-heading' ).each( function () {
+				var $header = $( this );
+				var level = $header.attr('class').match( /mw-heading([1-6])/ )[ 1 ];
+				var headtype = 'H' + level;
+				$header.nextUntil( non_nesting[headtype] ).addClass( 'hs-hide-' + headtype );
+			});
 		} else {
-			$link.text( $link.data('hide') );
-			$show = 1;
+			$( '.hs-hide-H1,.hs-hide-H2,.hs-hide-H3,.hs-hide-H4,.hs-hide-H5,.hs-hide-H6' ).removeClass( hide_classes );
 		}
 
-		var $textlink = $(".hidesection-link");
-		var $imglink  = $(".hidesection-image");
-		if ($show) {
-			// just brute-force through this
-			$('.hs-hide-H1,.hs-hide-H2,.hs-hide-H3,.hs-hide-H4,.hs-hide-H5,.hs-hide-H6').removeClass( hide_classes );
-			$textlink.text( $textlink.data('hide') );
-			$imglink.attr( 'src', $imglink.data('hide') );
-		} else {
-			$('.hidesection-link, .hidesection-image').each( function (i,el) { hidesection( undefined, $(el)) });
-		}
+		$( '.hidesection-link' ).text(
+			$( '.hidesection-link' ).first().data( $show ? 'show' : 'hide' )
+		);
+		$( '.hidesection-image' ).attr(
+			'src',
+			$( '.hidesection-image' ).first().data( $show ? 'show' : 'hide' )
+		);
 	}
 
 	mw.hook( 'wikipage.content' ).add( function () {
